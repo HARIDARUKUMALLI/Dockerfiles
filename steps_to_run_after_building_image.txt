@@ -1,0 +1,24 @@
+FROM alpine:latest
+MAINTAINER      manasashetty
+RUN apk update
+RUN apk fetch openjdk8
+RUN apk add curl
+RUN apk add ttf-dejavu
+RUN mkdir /opt/tomcat/
+WORKDIR /opt/tomcat
+RUN curl -O https://www-eu.apache.org/dist/tomcat/tomcat-8/v8.5.50/bin/apache-tomcat-8.5.50.tar.gz
+RUN tar xvfz apache*.tar.gz
+RUN mv apache-tomcat-8.5.50/* /opt/tomcat/.
+RUN apk add openjdk8
+RUN java -version
+EXPOSE 8080
+CMD ["/opt/tomcat/bin/catalina.sh", "run"]
+
+
+
+docker build -t manasashetty/tomcat:1.0 .
+ docker push manasashetty/tomcat:1.0
+docker pull manasashetty/tomcat:1.0
+ docker images
+docker run -it --name manasa_tomcat -p 8080:8080 f5c53dcf67c3113  
+docker run -it -d --name manasa_tomcat -p 8080:8080 f5c53dcf67c3
